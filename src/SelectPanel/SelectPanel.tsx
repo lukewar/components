@@ -46,12 +46,6 @@ const focusZoneSettings: Partial<FocusZoneHookSettings> = {
   disabled: true
 }
 
-const textInputProps: Partial<TextInputProps> = {
-  mx: 2,
-  my: 2,
-  contrast: true
-}
-
 export function SelectPanel({
   open,
   onOpenChange,
@@ -62,6 +56,7 @@ export function SelectPanel({
   filterValue: externalFilterValue,
   onFilterChange: externalOnFilterChange,
   items,
+  textInputProps,
   overlayProps,
   ...listProps
 }: SelectPanelProps): JSX.Element {
@@ -132,6 +127,16 @@ export function SelectPanel({
     initialFocusRef: inputRef
   }
 
+  console.log("@@@@@@@ custom component")
+
+  const customTextInputProps: Partial<TextInputProps> = {
+    ...textInputProps,
+    mx: 2,
+    my: 2,
+    contrast: true,
+    backgroundColor: 'red'
+  }
+
   return (
     <AnchoredOverlay
       renderAnchor={renderMenuAnchor}
@@ -150,7 +155,7 @@ export function SelectPanel({
           role="listbox"
           items={itemsToRender}
           selectionVariant={isMultiSelectVariant(selected) ? 'multiple' : 'single'}
-          textInputProps={textInputProps}
+          textInputProps={customTextInputProps}
           inputRef={inputRef}
         />
       </Flex>
